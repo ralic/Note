@@ -1,0 +1,15 @@
+she ni lian
+Selenium[sə'liniəm]
+浏览器自动交互工具
+
+测试网站：
+http://demo.magentocommerce.com/
+
+chapter1:
+ 简单测试
+chapter2：
+ 使用测试用例
+chapter3：
+ 根据各种元素查找（通过name，id，xpath，链接等）
+chapter4：
+ 元素交互

@@ -1,0 +1,355 @@
+[MUSIC].
+In this week's mini-project we're going to
+build a variance of the game 2048, okay?
+Now, the objective of the project this
+week is really to get you used
+to writing programs of the scale that
+we're going to write in this class, okay?
+If you've taken a programming course in
+Python before, we
+believe that you should be able to
+accomplish this project.
+Now, that doesn't mean that it's going to
+be easy.
+There are some complexities in building
+logic for this game.
+So, you are going to have to think about
+what you're doing
+and you are going to have to structure a
+code carefully, all right?
+But, I do think it's well within reach for
+those of you who've taken our
+previous class Introduction to Interactive
+Programming in Python
+or some equivalent introductory Python
+programming class, okay?
+So, let's take a look at the game.
+So this is the official version of the
+game 2048.
+And 2048 is a game where you're sliding
+tiles around
+on a grid, and you're trying to combine
+those tiles.
+So when you get two tiles of the same
+number
+together, they merge into one and their
+value doubles, okay.
+So you can see these 2s merged into a 4.
+I keep sliding things around.
+I can get bigger and bigger numbers.
+All right, and eventually the idea here
+is, that
+you try to get to the number 2048, okay?
+Simple enough, all right.
+So here's the game running in CodeScope.
+We're actually going to give you the GUI,
+so you're not going to have to write any
+of the GUI, but you can see that the game
+basically plays the same, all right?
+That, the tiles move around, although the
+animation is not as good.
+So, I strongly suggest, if you've never
+played
+the game before, that you play the game at
+the real site to start to understand
+exactly
+how the tiles move and merge together, all
+right?
+It's a little bit harder to see when
+there's no animation here, okay?
+But the original site does show the
+animation.
+Now, I also want to point out that the
+original game is played on
+a 4 by 4 grid but there's nothing really
+constraining the game in that way.
+So, we're going to make you allow that, or
+we're
+going to force you to have that be
+flexible, okay?
+You can see here I have a 5 by 4 grid but
+you can really have any size.
+And it doesn't change any of the rules of
+the game.
+It perhaps changes the experience for the
+player, but that's about it.
+So this is the template that we're
+going to give you for this mini-project.
+And, as you can see, we're giving you a
+2048 GUI
+module that will actually handle all the
+graphical elements, all right?
+So you're really focusing on the internal
+logic of the game, all right?
+So let's look at this.
+The first piece here is this merge
+function, all right?
+And this is the heart of the 2048 game.
+Taking a single row or a column and
+merging it, because you've moved
+that column in a particular direction or
+that row in a particular direction, okay.
+So you're going to have to think about,
+how does the game actually work?
+And there's more details on the
+description page.
+But, how do I then take one of these
+lines,
+a row or a column, and actually merge them
+appropriately?
+Where you have to understand the rules of
+the game, that tiles can only
+merge once, and they all shift over to the
+side, and so on, okay?
+Then we have a 2048 class, okay?
+And you're going to have to fill in a lot
+of methods in this class.
+And I'm not giving you, we're not giving
+you any of the pieces of the class.
+So you can use, are free to use whatever
+internal representation you'd like, okay?
+And, we encourage you to write a STR
+function so that as you're
+doing this you can print out your
+internals for your own debugging purposes,
+okay?
+But we also have functions called
+get_grid_height, get_grid_width,
+get_tile and so on, that allow us to see
+inside of your class, okay.
+And for testing purposes we need to see do
+you have the right internal state.
+Since we don't know what, you know, field
+names you're using for your internal
+states, we
+have these functions so that we can
+actually
+see them and test them appropriately, all
+right?
+Now, the second big piece besides merge of
+this
+project, is the move method of the 2048
+class, okay?
+This is when I hit the up arrow, I
+call the move method with the direction
+up, okay?
+And now you have to move all of the
+columns up.
+So, you're going to use that merge
+function but you also have
+to have the logic of figuring out what are
+all the columns.
+How do I merge them and then how do I put
+them back into the grid, okay?
+So, those are the two real tricky parts of
+this, this mini-project here.
+The rest of it, hopefully, is relatively
+straightforward.
+And, then you can see down at the bottom
+that we run the GUI for you.
+So once you've, you know, built your
+class, you can then run
+the GUI and you can have fun and play with
+your game.
+And make sure that the logic is all
+working out as you expect, okay?
+Now, one thing I do, you know, the
+template
+here runs it on a four by four grid.
+I do recommend that you start by debugging
+on a rectangular grid instead of a square
+grid
+because it's very easy to swap rows and
+columns
+and convince yourself that you have
+everything correct, okay.
+But, if you do five by four instead of
+four by four, and you run
+it in the GUI, you're immediately going to
+understand, hey did this work correctly or
+not?
+Now, we're going to work with grids
+several times throughout this class, okay.
+And 2048 is the first time you're going to
+see grids.
+So, linked off of the 2048 project
+description
+page is a page talking about grid
+representations.
+There are many different ways of
+representing a grid, okay.
+But we want to follow a, a consistent one
+throughout the class, okay.
+And so a grid is really a 2D, you
+know, sort of collection of, of cells, all
+right?
+And so what we're going to do in Python
+is represent these using a list of lists,
+okay?
+And the outer list is going to contain the
+rows and the inner
+lists are going to be the columns within
+that row, all right?
+So then, that becomes the question of, how
+do I index into the grids?
+And we're going to consistently index into
+the grids like this, all right?
+This grid here has a width of nine and a
+height of six, okay.
+And the upper-left grid square has then,
+you
+know, index zero, zero, row zero, column
+zero.
+And the lower-right cell has index 5, 8,
+for row number 5 and column number 8,
+okay?
+And so, I ask you to consistently follow
+these conventions.
+The tester will follow these conventions,
+and we will continue to
+follow these exact conventions throughout
+the course, whenever we use grids.
+So as I said, the merge function and the
+move method are the two complex pieces of
+this game.
+And when you implement your move method,
+you
+might be tempted to special case all the
+directions.
+And, you know, say something like if, you
+know, the direction is left.
+You know, do something, elif dir equals
+RIGHT,
+you know, do something else, and so on,
+okay?
+Now, this will work, and you can get it to
+work, and it's okay, all right?
+But I want you to start thinking about the
+fact
+that there might be other ways of doing
+things, okay?
+So, let's think about this grid here, all
+right.
+So, let's say I have a three by three
+grid.
+And this is, you know, location 0, 0, this
+is 1, 0, this is 2, 0, okay.
+And, let's say I'm trying to slide left,
+so somebody pushed the
+left arrow, I'm trying to move, merge all
+the tiles to the left.
+Well, how do I get the rows here?
+Well, I could say, if dir equal equal
+LEFT, and then do something.
+Or, I could recognize that, for all of the
+rows that I need
+to slide things left, this column here is
+a set of initial tiles.
+This is the direction, you know, the end,
+which I'm merging towards, okay?
+And so, let's say, how do I then go from
+here to
+the set of indices for the, the line that
+I need to merge?
+Well, that's what the offsets are, okay?
+So there's an offsets dictionary in the
+template, and
+in the offsets if you look at offsets
+LEFT, okay?
+They are going to be 0, 1, so let's think
+about that.
+What does that mean?
+Well, if I start with this tile with index
+1, 0, I
+say okay, I've got 1, 0 and then I add the
+offsets.
+I add 0 to the first number, okay?
+And 1 to the second number, I'm going to
+get 1, 1.
+I do it again, I add 0 to the first number
+and 1 to the second number I'm going to
+get 1, 2.
+I do it again, I get, add 0 to the first
+number, 1 to the second number I get 1, 3.
+Well, 1, 3 is outside of the grid so I
+must be done.
+Now look at what I have here.
+I actually have the three indices of a
+row, okay.
+This is a row that I now want to slide all
+the tiles in that direction, so
+I have the indices of the tiles that I
+would want to pass to the merge function,
+okay?
+So if you do it this, you can use the
+offsets
+dictionary and then you can create a
+dictionary of initial tiles.
+You can actually create all of the lines
+that you would need to merge for any
+direction,
+so that when you get into the move
+function you just look them up in a
+dictionary.
+You don't have to have this if dir is LEFT
+or if it's RIGHT or, and so on, okay?
+So again, if you can get it working
+with, you know, the if statements, that's
+perfectly fine.
+But again, I want you to start thinking
+about the
+fact that there might be other ways of
+doing things.
+And you might want to try to use these
+offsets and build up a dictionary that
+allows you to
+not have these special cases and you just
+look up
+the lines in the dictionary and you merge
+them all.
+All right, before you get started on this
+mini-project, I
+strongly suggest that you read the
+instructions in their entirety.
+Maybe even twice, okay?
+There's lots of information here and I
+want you to be
+able to start by understanding what you're
+being asked to do, okay?
+There's a simple overview of how the game
+works.
+We talk very in-depth about our testing
+infrastructure and how
+we expect you to be able to test your
+program, okay?
+And then we have some detailed
+instructions on how
+do you actually go about making this game
+work, okay?
+And I hope that these instructions will
+give you
+enough information that the project will
+not be that intimidating.
+Rather you feel like, hey this is in reach
+and I can do this, okay.
+I hope you find this mini-project to be
+fun introduction to this course.
+There are some complexities here, but
+overall we feel that this is at the
+right level of skill for people who are
+starting out in this course, okay.
+Now, does that mean if you find this a
+little bit difficult you should quit?
+Absolutely not, it will be a little bit
+difficult.
+The question is rather, is it within your
+reach to be able to do it, okay?
+We also want this mini-project to start to
+expose you to our machine grading
+infrastructure and,
+you know, our style guidelines so that you
+get used to both of these things, okay?
+But once you have your program working, I
+think you'll have a lot of fun playing it.
+I know I waste hours playing mine.
+

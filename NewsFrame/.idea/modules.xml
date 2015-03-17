@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Algorithms/.idea/Algorithms.iml" filepath="$PROJECT_DIR$/../Algorithms/.idea/Algorithms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MYSTUDY/.idea/MYSTUDY.iml" filepath="$PROJECT_DIR$/../MYSTUDY/.idea/MYSTUDY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MyUsefulFunction/.idea/MyUsefulFunction.iml" filepath="$PROJECT_DIR$/../MyUsefulFunction/.idea/MyUsefulFunction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/NewsFrame.iml" filepath="$PROJECT_DIR$/.idea/NewsFrame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../baseframe/.idea/baseframe.iml" filepath="$PROJECT_DIR$/../baseframe/.idea/baseframe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../news/.idea/news.iml" filepath="$PROJECT_DIR$/../news/.idea/news.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../zhongsou_21so/.idea/zhongsou_21so.iml" filepath="$PROJECT_DIR$/../zhongsou_21so/.idea/zhongsou_21so.iml" />
+    </modules>
+  </component>
+</project>
