@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Algorithms/.idea/Algorithms.iml" filepath="$PROJECT_DIR$/../Algorithms/.idea/Algorithms.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MYSTUDY.iml" filepath="$PROJECT_DIR$/.idea/MYSTUDY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ToolStudy/.idea/ToolStudy.iml" filepath="$PROJECT_DIR$/../ToolStudy/.idea/ToolStudy.iml" />
+      <module fileurl="file://C:/scrapy-program/helloworld/.idea/helloworld.iml" filepath="C:/scrapy-program/helloworld/.idea/helloworld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../myproject/.idea/myproject.iml" filepath="$PROJECT_DIR$/../myproject/.idea/myproject.iml" />
+      <module fileurl="file://C:/Python27/Lib/site-packages/Scrapy-0.25.1-py2.7.egg/scrapy/.idea/scrapy.iml" filepath="C:/Python27/Lib/site-packages/Scrapy-0.25.1-py2.7.egg/scrapy/.idea/scrapy.iml" />
+      <module fileurl="file://C:/tools/.idea/tools.iml" filepath="C:/tools/.idea/tools.iml" />
     </modules>
   </component>
 </project>

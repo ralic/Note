@@ -34,6 +34,8 @@ class ClassMethod(object):
                return self.f(klass, *args)
           return newfunc
 """
+
+
 class Kls(object):
     numInstance = 0
 
