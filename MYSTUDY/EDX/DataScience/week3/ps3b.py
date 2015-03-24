@@ -1,5 +1,5 @@
 # Problem Set 3: Simulating the Spread of Disease and Virus Population Dynamics 
-
+from ps3b_precompiled_27 import *
 import numpy
 import random
 import pylab
@@ -173,16 +173,16 @@ class Patient(object):
         return len(repro_virus)
 
 
-if __name__ == '__main__':
-    random.seed(0)
-    # v1 = SimpleVirus(1.0, 0.0)
-    v1 = SimpleVirus(1.0, 1.0)
-    for i in range(10):
-        print v1.doesClear()
-        try:
-            print v1.reproduce(0)
-        except NoChildException:
-            print "NoChildException"
+# if __name__ == '__main__':
+#     random.seed(0)
+#     # v1 = SimpleVirus(1.0, 0.0)
+#     v1 = SimpleVirus(1.0, 1.0)
+#     for i in range(10):
+#         print v1.doesClear()
+#         try:
+#             print v1.reproduce(0)
+#         except NoChildException:
+#             print "NoChildException"
     # viruses = [SimpleVirus(0.56, 0.97), SimpleVirus(0.45, 0.97), SimpleVirus(0.55, 0.74), SimpleVirus(0.58, 0.95),
     #            SimpleVirus(0.15, 0.89), SimpleVirus(0.13, 0.92)
     # ]
@@ -214,9 +214,23 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
     numTrials: number of simulation runs to execute (an integer)
     """
 
-    # TODO
+    for trial in range(numTrials):
+        timestep = []
+        average_virus_size = []
+        viruses = [SimpleVirus(maxBirthProb, clearProb) for i in range(numViruses)]
+        patient = Patient(viruses, maxPop)
+        for chance in range(300):
+            timestep.append(chance)
+            average_virus_size.append(float(patient.update()))
+    pylab.plot(timestep, average_virus_size)
+    pylab.title("SimpleVirus simulation")
+    pylab.xlabel("Time Steps")
+    pylab.ylabel("Average Virus Population")
+    pylab.legend()
+    pylab.show()
 
-
+if __name__ == '__main__':
+    simulationWithoutDrug(1, 90, 0.8, 0.1, 1)
 
 #
 # PROBLEM 4
