@@ -400,9 +400,6 @@ class TreatedPatient(Patient):
         return len(resist_viruses)
 
 
-
-
-
     def update(self):
         """
         Update the state of the virus population in this patient for a single
@@ -447,13 +444,6 @@ class TreatedPatient(Patient):
 
 
 
-if __name__ == '__main__':
-    virus1 = ResistantVirus(1.0, 0.0, {"drug1": True}, 0.0)
-    virus2 = ResistantVirus(1.0, 0.0, {"drug1": False}, 0.0)
-    patient = TreatedPatient([virus1, virus2], 1000000)
-    patient.addPrescription("drug1")
-
-
 
 #
 # PROBLEM 5
@@ -481,6 +471,35 @@ def simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
     
     """
 
-    # TODO
+    for trial in range(numTrials):
+        resist = "guttagonol"
+        virsues = [ResistantVirus(maxBirthProb, clearProb, resistances, mutProb) for i in range(numViruses)]
+        patient = TreatedPatient(virsues, maxPop)
+        virsues_total_population = []
+        virsues_resist_population = []
+        timestep = []
+        for first_timestep in range(1, 150):
+            timestep.append(first_timestep)
+            virsues_total_population.append((float(patient.update())))
+            virsues_resist_population.append(float(patient.getResistPop(resist)))
+        patient.addPrescription(resist)
+        for second_timestep in range(150, 301):
+            timestep.append(first_timestep)
+            virsues_total_population.append(float(patient.update()))
+            virsues_resist_population.append(float(patient.getResistPop(resistances.values())))
+    print virsues_total_population
+    print "------"
+    print virsues_resist_population
+    pylab.plot(virsues_total_population, timestep)
+    pylab.plot(virsues_resist_population, timestep)
+    pylab.title("ResistantVirus simulation")
+    pylab.xlabel("time step")
+    pylab.ylabel("# viruses")
+    pylab.legend()
+    pylab.show()
 
+if __name__ == '__main__':
+    import random
+    random.seed(0)
+    simulationWithDrug(1, 10, 1.0, 0.0, {}, 1.0, 5)
 
