@@ -1,27 +1,36 @@
-from django.http import HttpResponse
-from django.conf.urls import url
-from django.conf import settings
-import sys
-settings.configure(
-    DEBUG=True,
-    SECRET_KEY='thisisthesecretkey',
-    ROOT_URLCONF=__name__,
-    MIDDLEWARE_CLASSES=(
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    ),
-)
+from flask import Flask, url_for
+app = Flask(__name__)
 
 
-def index(request):
-    return HttpResponse("Hello World!")
+@app.route('/')
+def hello_world():
+    return 'Hello World!'
 
 
-urlpattern = (
-    url(r"^$", index),
-)
+@app.route('/hello')
+def say_hell():
+    return "What a funny day is it? "
+
+
+@app.route('/')
+def index():
+    pass
+
+
+@app.route('/login')
+def login():
+    pass
+
+@app.route('/user/<username>')
+def profile(username):
+    pass
+
+with app.test_request_context():
+    print url_for('index')
+    print url_for('login')
+    print url_for('login', next='/')
+    print url_for('profile', username='John Doe')
 
 if __name__ == '__main__':
-    from django.core.management import execute_from_command_line
-    execute_from_command_line(sys.argv)
+    app.debug = True
+    app.run()
