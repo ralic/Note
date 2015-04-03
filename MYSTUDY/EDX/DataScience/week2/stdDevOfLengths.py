@@ -1,5 +1,6 @@
 # coding=utf-8
 # 求标准差
+
 def stdDevOfLengths(L):
     import math
     if not L:
