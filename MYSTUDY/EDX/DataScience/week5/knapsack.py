@@ -35,7 +35,7 @@ def buildItems():
     return Items
 
 
-# 算法实现
+# 算法实现, 物品、最大承重、排序函数
 def greedy(Items, maxWeight, keyFcn):
     assert type(Items) == list and maxWeight >= 0
     # 将所有的物品按keyFcn排序
@@ -151,7 +151,7 @@ def maxVal(toConsider, avail):
         withVal, withToTake = maxVal(toConsider[1:],
                                      avail - nextItem.getWeight())
         withVal += nextItem.getValue()
-        #Explore right branch
+        # Explore right branch
         withoutVal, withoutToTake = maxVal(toConsider[1:], avail)
 
         #Choose better branch
@@ -170,6 +170,7 @@ def smallTest():
     print ('Total value of items taken = ' + str(val))
 
 
-
 if __name__ == '__main__':
-    testGreedys()
+    # testGreedys()
+    # print dToB(3, 3)
+    print genPset(["bob", "mary", "dud"])
