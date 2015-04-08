@@ -12,7 +12,8 @@ def stddev(alist):
     sd = math.sqrt(sum([(num - list_mean) ** 2 for num in alist]) / float(n))
     return sd
 
-# 变异系数
+
+# 变异系数= 标准差 /  均值
 def cv(alist):
     sd = stddev(alist)
     means = mean(alist)

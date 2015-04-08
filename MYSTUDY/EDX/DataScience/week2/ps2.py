@@ -58,7 +58,7 @@ class Position(object):
         return "(%0.2f, %0.2f)" % (self.x, self.y)
 
 
-# === Problem 1, 定义房间类
+# === Problem 1, 定义房间类,
 class RectangularRoom(object):
     """
     A RectangularRoom represents a rectangular region containing clean or dirty
@@ -341,7 +341,6 @@ def showPlot1(title, x_label, y_label):
     pylab.ylabel(y_label)
     pylab.show()
 
-# showPlot1("Time It Takes 1 - 10 Robots To Clean 80% Of A Room", "Number of Robots", "Time-steps")
 
     
 def showPlot2(title, x_label, y_label):
@@ -365,30 +364,5 @@ def showPlot2(title, x_label, y_label):
     pylab.ylabel(y_label)
     pylab.show()
 
-showPlot2("a", "Aspect Ratio", "Time-steps")
-
-# === Problem 5
-#
-# 1) Write a function call to showPlot1 that generates an appropriately-labeled
-#     plot.
-#
-#       (... your call here ...)
-#
-
-#
-# 2) Write a function call to showPlot2 that generates an appropriately-labeled
-#     plot.
-#
-#       (... your call here ...)
-#
-
-
-# if __name__ == '__main__':
-#     r = RectangularRoom(3, 4)
-#     pos = Position(1, 2)
-#     robot = Robot(r, 100)
-#     print robot.getRobotPosition()
-#     sr = StandardRobot(r, 10)
-#     # sr.updatePositionAndClean()
 
 

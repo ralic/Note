@@ -9,9 +9,4 @@ import scrapy
 
 
 class ProductItem(scrapy.Item):
-    name = scrapy.Field()
-    url = scrapy.Field()
-    price = scrapy.Field()
-    old_price = scrapy.Field()
-    source = scrapy.Field()
-    post_info = scrapy.Field()
+    title = scrapy.Field()
