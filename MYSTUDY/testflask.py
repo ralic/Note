@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import sys
 app = Flask(__name__)
 
@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/hello')
 @app.route('/hello/<user>')
 def hello_world(user=None):
+    print request.args.get("shops")
     user = user or 'Shalabh'
     return """
     <html>
