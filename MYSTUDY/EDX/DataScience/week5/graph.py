@@ -120,21 +120,58 @@ class WeightedEdge(Edge):
         return self.outdoor
 
 
+def dfs(graph, start_node, end_node, path=[]):
+    path = path + [start_node]
+    print "Current dfs path:", path
+    if start_node == end_node:
+        return path
+    for node in graph.childrenOf(start_node):
+        if node[0] not in path:
+            newpath = dfs(graph, node[0], end_node, path)
+            if newpath is not None:
+                return newpath
+    return None
+
+
+def dfs_shortpath(graph, start_node, end_node, path=[], shortest=None):
+    path = path + [start_node]
+    print "Current dfs path:", path
+    if start_node == end_node:
+        return path
+    for node in graph.childrenOf(start_node):
+        if node[0] not in path:
+            newpath = dfs(graph, node[0], end_node, path)
+            if newpath is not None:
+                shortest = newpath
+    return shortest
+
+
 if __name__ == '__main__':
-    nx = Node('x')
-    ny = Node('y')
-    nz = Node('z')
-    e1 = WeightedEdge(nx, ny, 18, 8)
-    e2 = WeightedEdge(ny, nz, 20, 1)
-    e3 = WeightedEdge(nz, nx, 7, 6)
-    e4 = WeightedEdge(nz, nx, 9, 9)
+    n0 = Node('ABC')
+    n1 = Node('ACB')
+    n4 = Node('CAB')
+    n5 = Node('CBA')
+    n2 = Node('BAC')
+    n3 = Node('BCA')
+    e1 = WeightedEdge(n0, n1, 18, 8)
+    e2 = WeightedEdge(n0, n2, 20, 1)
+    e3 = WeightedEdge(n1, n4, 7, 6)
+    e5 = WeightedEdge(n4, n5, 9, 9)
+    e6 = WeightedEdge(n2, n3, 9, 9)
+    e4 = WeightedEdge(n3, n5, 9, 9)
     g = WeightedDigraph()
-    g.addNode(nx)
-    g.addNode(ny)
-    g.addNode(nz)
+    g.addNode(n0)
+    g.addNode(n1)
+    g.addNode(n2)
+    g.addNode(n3)
+    g.addNode(n4)
+    g.addNode(n5)
     g.addEdge(e1)
     g.addEdge(e2)
     g.addEdge(e3)
     g.addEdge(e4)
+    g.addEdge(e5)
+    g.addEdge(e6)
     print g.edges
-    print g
+    print dfs_shortpath(g, n5, n3)
+
