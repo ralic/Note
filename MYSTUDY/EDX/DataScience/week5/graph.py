@@ -1,3 +1,4 @@
+# coding=utf-8
 # 6.00.2x Problem Set 5
 # Graph optimization
 #
@@ -120,7 +121,9 @@ class WeightedEdge(Edge):
         return self.outdoor
 
 
-def dfs(graph, start_node, end_node, path=[]):
+def dfs(graph, start_node, end_node, path=None):
+    if not path:
+        path = []
     path = path + [start_node]
     print "Current dfs path:", path
     if start_node == end_node:
@@ -133,18 +136,39 @@ def dfs(graph, start_node, end_node, path=[]):
     return None
 
 
-def dfs_shortpath(graph, start_node, end_node, path=[], shortest=None):
+def dfs_shortpath(graph, start_node, end_node, path=None, shortest=None):
+    if not path:
+        path = []
     path = path + [start_node]
     print "Current dfs path:", path
     if start_node == end_node:
         return path
     for node in graph.childrenOf(start_node):
-        if node[0] not in path:
-            newpath = dfs(graph, node[0], end_node, path)
+        if node not in path:
+            newpath = dfs(graph, node, end_node, path)
             if newpath is not None:
                 shortest = newpath
     return shortest
 
+
+def bfs(graph, start_node, end_node, q=None):
+    if not q:
+        q = []
+    initpath = [start_node]
+    q.append(initpath)
+    while len(q) != 0:
+        print q
+        # 出队
+        tmppath = q.pop(0)
+        lastnode = tmppath[-1]
+        print 'Current dequened path:', tmppath
+        if lastnode == end_node:
+                return tmppath
+        for node in graph.childrenOf(lastnode):
+            if node not in tmppath:
+                newpath = tmppath + [node]
+                q.append(newpath)
+    return None
 
 if __name__ == '__main__':
     n0 = Node('ABC')
@@ -153,13 +177,13 @@ if __name__ == '__main__':
     n5 = Node('CBA')
     n2 = Node('BAC')
     n3 = Node('BCA')
-    e1 = WeightedEdge(n0, n1, 18, 8)
-    e2 = WeightedEdge(n0, n2, 20, 1)
-    e3 = WeightedEdge(n1, n4, 7, 6)
-    e5 = WeightedEdge(n4, n5, 9, 9)
-    e6 = WeightedEdge(n2, n3, 9, 9)
-    e4 = WeightedEdge(n3, n5, 9, 9)
-    g = WeightedDigraph()
+    e1 = Edge(n0, n1)
+    e2 = Edge(n0, n2)
+    e3 = Edge(n1, n4)
+    e5 = Edge(n4, n5)
+    e6 = Edge(n2, n3)
+    e4 = Edge(n3, n5)
+    g = Digraph()
     g.addNode(n0)
     g.addNode(n1)
     g.addNode(n2)
@@ -174,4 +198,4 @@ if __name__ == '__main__':
     g.addEdge(e6)
     print g.edges
     print dfs_shortpath(g, n5, n3)
-
+    print bfs(g, n0, n3)

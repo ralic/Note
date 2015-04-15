@@ -1,58 +1,46 @@
+# coding=utf-8
 # 6.00.2x Problem Set 4
+import math
 
 import numpy
 import random
 import pylab
-from ps3b import *
+from ps3b import ResistantVirus, TreatedPatient
+
+import math
+def mean(alist):
+    return sum(alist) / float(len(alist))
+
+
+def stddev(alist):
+    n = len(alist)
+    list_mean = mean(alist)
+    sd = math.sqrt(sum([(num - list_mean) ** 2 for num in alist]) / float(n))
+    return sd
+
+
+# 变异系数= 标准差 /  均值
+def cv(alist):
+    sd = stddev(alist)
+    means = mean(alist)
+    return sd / means
 
 #
 # PROBLEM 1
 #
 def simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
-                       mutProb, numTrials):
-    """
-    Runs simulations and plots graphs for problem 5.
-
-    For each of numTrials trials, instantiates a patient, runs a simulation for
-    150 timesteps, adds guttagonol, and runs the simulation for an additional
-    150 timesteps.  At the end plots the average virus population size
-    (for both the total virus population and the guttagonol-resistant virus
-    population) as a function of time.
-
-    numViruses: number of ResistantVirus to create for patient (an integer)
-    maxPop: maximum virus population for patient (an integer)
-    maxBirthProb: Maximum reproduction probability (a float between 0-1)
-    clearProb: maximum clearance probability (a float between 0-1)
-    resistances: a dictionary of drugs that each ResistantVirus is resistant to
-                 (e.g., {'guttagonol': False})
-    mutProb: mutation probability for each ResistantVirus particle
-             (a float between 0-1).
-    numTrials: number of simulation runs to execute (an integer)
-
-    """
-    virsues_total_population = [0 for i in range(300)]
-    virsues_resist_population = [0 for i in range(300)]
-    timestep = range(1, 301)
-    patient_resist = ["guttagonol"]
+                       mutProb, numTrials, start_times):
+    average = []
     for trial in range(numTrials):
         virsues = [ResistantVirus(maxBirthProb, clearProb, resistances, mutProb) for i in range(numViruses)]
         patient = TreatedPatient(virsues, maxPop)
-        for first_timestep in range(150):
-            virsues_total_population[first_timestep] += patient.update()
-            virsues_resist_population[first_timestep] += patient.getResistPop(patient_resist)
+        for first_timestep in range(start_times):
+            patient.update()
         patient.addPrescription("guttagonol")
-        for second_timestep in range(150, 300):
-            virsues_total_population[second_timestep] += patient.update()
-            virsues_resist_population[second_timestep] += patient.getResistPop(patient.getPrescriptions())
-    virsues_total_population = map(lambda x: x / float(numTrials), virsues_total_population)
-    virsues_resist_population = map(lambda x: x / float(numTrials), virsues_resist_population)
-    pylab.plot(virsues_total_population, timestep)
-    pylab.plot(virsues_resist_population, timestep)
-    pylab.title("ResistantVirus simulation")
-    pylab.xlabel("time step")
-    pylab.ylabel("# viruses")
-    pylab.legend()
-    pylab.show()
+        for second_timestep in range(start_times, start_times+150):
+            patient.update()
+        average.append(patient.getTotalPop())
+    return average
 
 def simulationDelayedTreatment(numTrials):
     """
@@ -74,30 +62,46 @@ def simulationDelayedTreatment(numTrials):
     resistances = {'guttagonol': False}
     mutProb = 0.005
     time = [300, 150, 75, 0]
-    for index, one_time in enumerate(time):
-        virsues_total_population = [0 for i in range(one_time + 150)]
-        timestep = range(1, one_time + 150 + 1)
-        patient_resist = ["guttagonol"]
-        for trial in range(numTrials):
-            virsues = [ResistantVirus(maxBirthProb, clearProb, resistances, mutProb) for i in range(numViruses)]
-            patient = TreatedPatient(virsues, maxPop)
-            for first_timestep in range(one_time):
-                virsues_total_population[first_timestep] += patient.update()
-            patient.addPrescription("guttagonol")
-            for second_timestep in range(one_time, one_time + 150):
-                virsues_total_population[second_timestep] += patient.update()
-            virsues_total_population = map(lambda x: x / float(numTrials), virsues_total_population)
-        pylab.title("ResistantVirus simulation")
-        pylab.xlabel("total virus")
-        pylab.ylabel("trials ->" + str(one_time))
-        pylab.ylim(1, 450)
-        pylab.hist(virsues_total_population)
-    pylab.show()
-simulationDelayedTreatment(10)
+    result = simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
+                                  mutProb, numTrials, 0)
+    f = filter(lambda x: x <= 50, result)
+    print f, len(f)
+    print result
+    print len(f)/float(len(result))
+
+    # for index, t in enumerate(time):
+    #     popu = simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
+    #                               mutProb, numTrials, t)
+    #     pylab.subplot(220+index+1)
+    #     pylab.hist(popu, bins=numTrials)
+    #     pylab.title("simulation")
+    #     pylab.xlabel("Populations")
+    #     pylab.ylabel("numTrails")
+    #     pylab.legend()
+    # pylab.show()
 
 #
-# PROBLEM 2
+# simulationDelayedTreatment(100)
 #
+# PROBLEM 2
+
+def simulationWithDrug2(numViruses, maxPop, maxBirthProb, clearProb, resistances,
+                       mutProb, numTrials, start_times):
+    average = []
+    for trial in range(numTrials):
+        virsues = [ResistantVirus(maxBirthProb, clearProb, resistances, mutProb) for i in range(numViruses)]
+        patient = TreatedPatient(virsues, maxPop)
+        for first_timestep in range(150):
+            patient.update()
+        patient.addPrescription("guttagonol")
+        for second_timestep in range(start_times):
+            patient.update()
+        patient.addPrescription("grimpex")
+        for third_timestep in range(150):
+            patient.update()
+        average.append(patient.getTotalPop())
+    return average
+
 def simulationTwoDrugsDelayedTreatment(numTrials):
     """
     Runs simulations and make histograms for problem 2.
@@ -111,4 +115,21 @@ def simulationTwoDrugsDelayedTreatment(numTrials):
 
     numTrials: number of simulation runs to execute (an integer)
     """
-    # TODO
+    numViruses = 100
+    maxPop = 1000
+    maxBirthProb = 0.1
+    clearProb = 0.05
+    resistances = {'guttagonol': False, 'grimpex': False}
+    mutProb = 0.005
+    time = [300, 150, 75, 0]
+    result = simulationWithDrug2(numViruses, maxPop, maxBirthProb, clearProb, resistances,
+                                  mutProb, numTrials, 300)
+    f = filter(lambda x: x <= 50, result)
+    print f, len(f)
+    print result, len(result)
+    print len(f)/float(len(result))
+    print cv(result)
+
+# 2.16773301573, 1.13, 0.4
+
+simulationTwoDrugsDelayedTreatment(100)

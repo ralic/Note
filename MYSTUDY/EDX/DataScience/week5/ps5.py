@@ -55,6 +55,8 @@ def load_map(mapFilename):
 # State the optimization problem as a function to minimize
 # and what the constraints are
 #
+def bruteForcePath(digraph, start, end, path=None, allpath=None):
+    pass
 
 def bruteForceSearch(digraph, start, end, maxTotalDist, maxDistOutdoors):    
     """
@@ -81,7 +83,6 @@ def bruteForceSearch(digraph, start, end, maxTotalDist, maxDistOutdoors):
         maxDistOutdoors constraints, then raises a ValueError.
     """
 
-    pass
 
 #
 # Problem 4: Finding the Shorest Path using Optimized Search Method
@@ -123,7 +124,7 @@ if __name__ == '__main__':
     print isinstance(mitMap, WeightedDigraph)
     print 'nodes', mitMap.nodes
     print 'edges', mitMap.edges
-
+    print bruteForcePath(mitMap, "66", "64")
 
 #     LARGE_DIST = 1000000
 
