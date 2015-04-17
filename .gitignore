@@ -1,3 +1,4 @@
 *.xml
 *.pyc
 *.iml
+db.sqlite3
