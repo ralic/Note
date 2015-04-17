@@ -25,3 +25,4 @@ if __name__ == '__main__':
     print mean([0.1, 0.1, 0.1])
     print stddev([6, 7, 5, 10])
     print cv([10, 4, 12, 15, 20, 5])
+
