@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MYSTUDY.iml" filepath="$PROJECT_DIR$/.idea/MYSTUDY.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../StandardLib/.idea/StandardLib.iml" filepath="$PROJECT_DIR$/../StandardLib/.idea/StandardLib.iml" />
       <module fileurl="file://C:/Python27/Lib/site-packages/Scrapy-0.25.1-py2.7.egg/scrapy/.idea/scrapy.iml" filepath="C:/Python27/Lib/site-packages/Scrapy-0.25.1-py2.7.egg/scrapy/.idea/scrapy.iml" />
     </modules>
   </component>

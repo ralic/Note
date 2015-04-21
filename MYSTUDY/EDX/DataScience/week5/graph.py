@@ -129,8 +129,8 @@ def dfs(graph, start_node, end_node, path=None):
     if start_node == end_node:
         return path
     for node in graph.childrenOf(start_node):
-        if node[0] not in path:
-            newpath = dfs(graph, node[0], end_node, path)
+        if node not in path:
+            newpath = dfs(graph, node, end_node, path)
             if newpath is not None:
                 return newpath
     return None
@@ -145,9 +145,10 @@ def dfs_shortpath(graph, start_node, end_node, path=None, shortest=None):
         return path
     for node in graph.childrenOf(start_node):
         if node not in path:
-            newpath = dfs(graph, node, end_node, path)
-            if newpath is not None:
-                shortest = newpath
+            if shortest is None or len(path) < len(shortest):
+                newpath = dfs(graph, node, end_node, path)
+                if newpath is not None:
+                    shortest = newpath
     return shortest
 
 
@@ -177,12 +178,13 @@ if __name__ == '__main__':
     n5 = Node('CBA')
     n2 = Node('BAC')
     n3 = Node('BCA')
-    e1 = Edge(n0, n1)
+    e1 = WeightedEdge(n0, n1, 1, 1)
     e2 = Edge(n0, n2)
     e3 = Edge(n1, n4)
     e5 = Edge(n4, n5)
     e6 = Edge(n2, n3)
     e4 = Edge(n3, n5)
+    print e1
     g = Digraph()
     g.addNode(n0)
     g.addNode(n1)
@@ -196,6 +198,6 @@ if __name__ == '__main__':
     g.addEdge(e4)
     g.addEdge(e5)
     g.addEdge(e6)
-    print g.edges
-    print dfs_shortpath(g, n5, n3)
-    print bfs(g, n0, n3)
+    # print dfs(g, n0, n3)
+    print dfs_shortpath(g, n0, n5)
+    # print bfs(g, n0, n3)
