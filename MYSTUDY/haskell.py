@@ -26,6 +26,17 @@ null = lambda lst: lst == []
 take = lambda num, lst: lst[:num]
 
 
+def root(x, n):
+    number = x
+    while True:
+        value = int(number ** n)
+        if value == int(x):
+            return number
+        if value > int(x):
+             number **= 0.5
+        else:
+             number += 1
+
 if __name__ == '__main__':
     print "succ 1, 2, 100:", succ(1), succ(2), succ(100)
     print "head from [1, 2, 3, 4, 5]:", head([1, 2, 3, 4, 5])
@@ -34,5 +45,5 @@ if __name__ == '__main__':
     print "init from [1, 2, 3, 4, 5]:", init([1, 2, 3, 4, 5])
     print "take first three numbers from [1, 2, 3, 4, 5]:", take(3, [1, 2, 3, 4, 5])
     print "null:", null([])
-
+    print root(256, 4)
 

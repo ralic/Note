@@ -1,5 +1,4 @@
 from scrapy.spider import Spider
-from helloworld.items import ProductItem
 
 
 class DDSpider(Spider):
@@ -8,7 +7,6 @@ class DDSpider(Spider):
 
     def parse(self, response):
         for book in response.xpath("//div[@class='inner']//p[@class='name']//a/@title").extract():
-            item = ProductItem()
             item['title'] = book
             print item, "...."
             yield item

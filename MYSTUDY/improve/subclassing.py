@@ -16,6 +16,7 @@ class MyField(dict):
                 raise DistinctError(("This value already exists for '%s'" % str(self[existing_key])))
         except ValueError:
             pass
+
         super(Field, self).__setitem__(key, value)
 
 def testfield():
