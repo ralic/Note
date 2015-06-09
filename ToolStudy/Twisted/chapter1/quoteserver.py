@@ -30,13 +30,16 @@ class QuoteProtocol(protocol.Protocol):
 # 保持所有事件的状态
 class QuoteFactory(Factory):
     numConnections = 0
+    protocol = QuoteProtocol
 
     def __init__(self, quote=None):
         self.quote = quote or "I think the weather is well!"
 
     def buildProtocol(self, addr):
-        return QuoteProtocol(self)
+        return self.protocol(self)
 
 
 reactor.listenTCP(8000, QuoteFactory())
 reactor.run()
+
+

@@ -13,12 +13,13 @@ class WubaSpider(Spider):
         self.limit = int(kwargs.get("limit", 1))
 
     def start_requests(self):
-        self.start_urls = [self.start_url + "pn"+str(num) for num in range(1, self.limit + 1)]
+        self.start_urls = [self.start_url + "pn" + str(num) for num in range(1, self.limit + 1)]
         for url in self.start_urls:
             yield self.make_requests_from_url(url)
 
     def make_requests_from_url(self, url):
         return Request(url, dont_filter=True, callback=self.parse_url)
+
     """
     title = scrapy.Field()
     detail_url = scrapy.Field()
@@ -31,11 +32,12 @@ class WubaSpider(Spider):
     contact = scrapy.Field()
     lone_detail = scrapy.Field()
     """
+
     def parse_url(self, response):
         for detail_url, title, price, types in zip(response.xpath("//h1//a[@class='t']//@href").extract(),
-                                     response.xpath("//h1//a[@class='t']//text()").extract(),
-                                     response.xpath("//b[@class='pri']//text()").extract(),
-                                     response.xpath("//span[@class='showroom']//text()").extract()):
+                response.xpath("//h1//a[@class='t']//text()").extract(),
+                response.xpath("//b[@class='pri']//text()").extract(),
+                response.xpath("//span[@class='showroom']//text()").extract()):
             item = TenancyItem()
             item['detail_url'] = detail_url
             item['price'] = price

@@ -1,6 +1,7 @@
+# coding=utf-8
 from twisted.internet import reactor, protocol
 # @UndefinedVariable
-
+# 通过factory来保持协议的状态
 
 class QuoteProtocol(protocol.Protocol):
     def __init__(self, factory):
@@ -38,10 +39,8 @@ def maybeStopReactor():
         reactor.stop()
 
 quotes = [
-    "You snooze you lose",
-    "The early bird gets the worm",
-    "Carpe diem"
-]
+    "You snooze you lose %d" % d for d in range(1000)
+ ]
 
 quote_counter = len(quotes)
 for q in quotes:
