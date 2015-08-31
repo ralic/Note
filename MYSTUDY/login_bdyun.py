@@ -12,8 +12,7 @@ class LoginBase(object):
     def __init__(self):
         self.session = requests.Session()
         self.headers = {"User-Agent":
-                           "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-                        "Referer":	"http://yun.baidu.com/", }
+                           "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"}
         self.cookies = {}
 
     def first_requeset(self):
@@ -26,19 +25,7 @@ class LoginBase(object):
         token = re.search(r'token.*?: "(.*?)",', response.content).groups()[0]
         return token
 
-    def second_request(self):
-        token = self.first_requeset()
-        print token
-        data = {"token": token, "username": "loveyui1314", "password": "wx1314zzhij",
-                "tpl": "yun", "apiver": "v3", "logintype": "basicLogin", "logLoginType": "pc_loginBasic",
-                "loginmerge": "true", "staticpage": "http://yun.baidu.com/chres/static/js/pass_v3_jump.html",
-                "verifycode":""}
-        response = self.session.post("https://passport.baidu.com/v2/api/?login",
-                                     data=data, headers=self.headers, cookies=self.cookies)
-        print response.content
-        print response.url
-        # print response.json()
-# https://passport.baidu.com/v2/api/?login
+
 
 if __name__ == '__main__':
     l = LoginBase()

@@ -1,4 +1,5 @@
-from contextlib import contextmanager
-import autopy
-import random
+import numpy
 
+
+class Vector(object):
+    def __init__(self):
