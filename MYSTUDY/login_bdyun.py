@@ -29,4 +29,3 @@ class LoginBase(object):
 
 if __name__ == '__main__':
     l = LoginBase()
-    l.second_request()

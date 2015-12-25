@@ -141,3 +141,27 @@ class NewPerson(object):
         del self._name
 
 
+class SessionMixin(object):
+    """Expands a basic dictionary with an accessors that are expected
+    by Flask extensions and users for the session.
+    """
+    def _get_permanent(self):
+        return self.get('_permanent', False)
+
+    def _set_permanent(self, value):
+        self['_permanent'] = bool(value)
+
+    #: this reflects the ``'_permanent'`` key in the dict.
+    permanent = property(_get_permanent, _set_permanent)
+    del _get_permanent, _set_permanent
+
+    #: some session backends can tell you if a session is new, but that is
+    #: not necessarily guaranteed.  Use with caution.  The default mixin
+    #: implementation just hardcodes `False` in.
+    new = False
+
+    #: for some backends this will always be `True`, but some backends will
+    #: default this to false and detect changes in the dictionary for as
+    #: long as changes do not happen on mutable structures in the session.
+    #: The default mixin implementation just hardcodes `True` in.
+    modified = True
